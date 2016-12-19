@@ -1,0 +1,58 @@
+LIBROS
+	CASA DEL LIBRO
+	DC COMICS
+	EBOOK READER
+	MARVEL COMICS
+	SCRIBD
+	GOOGLE PLAY BOOKS
+	ICREATE
+	Guinness World Records 2014
+EDUCACIÓN
+	Babbel
+	NASA
+	iCuadernos by RUBIO
+JUEGOS
+	ACCION
+		Clash of Clans
+		Clash Royale
+		Super Mario Run
+	AVENTURA
+		N.O.V.A. 3
+		Plants vs. Zombies 2
+		MARVEL Batalla de Superhéroes
+	PUZZLE
+		Candy Crush Saga
+		2048
+		Angry Birds 2
+	DEPORTES
+		FIFA 16 Ultimate Team
+		EA SPORTS UFC
+		Trial Xtreme 3
+	ESTRATEGIA
+		Boom Beach
+		Mobile Strike
+		Tekken Card Tournament
+COMPRAS
+	Wallapop
+	Amazon Movil
+	Privalia
+	Stradivarius
+	ZaraHome Shop Online
+REDES SOCIALES
+	Facebook
+	LinkedIn
+	Telegram
+	LINE
+	Messenger
+	Skype
+	Whatsapp
+	Twitter
+NAVEGACIÓN
+	Tom Tom GO Mobile
+	Google Maps
+	EMT Madrid
+NOTICIAS
+	BBC News
+	NYTimes
+	El Mundo
+	EL PAIS
