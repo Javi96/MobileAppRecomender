@@ -1,2 +1,2 @@
-# RecomendadorApp
-Recomendador de aplicaciones para móvil
+# MovileAppRecomender
+Mobile apps recomender
