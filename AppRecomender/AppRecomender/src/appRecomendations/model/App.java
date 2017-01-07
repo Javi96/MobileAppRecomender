@@ -1,24 +1,18 @@
 package appRecomendations.model;
 
-import java.util.ArrayList;
-
 public class App {
 	private String name;
 	private float prize;
-	private String superCat;
-	private ArrayList categoryList;
-	private float size;
+	private String categoryList;
+	//private float size;
 	
 	
-	public App(String name, float prize, String[] cat, float size){
-		this.size = size;
+	public App(String name, float prize, String cat, float size){
+		//this.size = size;
 		this.name = name;
 		this.prize = prize;
-		this.superCat = cat[0];
-		categoryList = new ArrayList();
-		for(int i = 1; i < cat.length; i++){
-			this.categoryList.add(cat[i]);
-		}
+		//this.superCat = cat[0];
+		categoryList = cat;
 	}
 
 	public String getName() {
@@ -37,19 +31,11 @@ public class App {
 		this.prize = prize;
 	}
 
-	public String getSuperCat() {
-		return superCat;
-	}
-
-	public void setSuperCat(String superCat) {
-		this.superCat = superCat;
-	}
-
-	public ArrayList getCategoryList() {
+	public String getCategoryList() {
 		return categoryList;
 	}
 
-	public void setCategoryList(ArrayList categoryList) {
+	public void setCategoryList(String categoryList) {
 		this.categoryList = categoryList;
 	}
 }

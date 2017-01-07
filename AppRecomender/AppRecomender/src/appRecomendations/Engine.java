@@ -5,9 +5,14 @@ import java.util.Iterator;
 import jess.Fact;
 import jess.JessException;
 import jess.QueryResult;
+import jess.RU;
 import jess.Rete;
+import jess.Value;
 import jess.ValueVector;
 import jess.WorkingMemoryMarker;
+import appRecomendations.model.App;
+import appRecomendations.model.Launch;
+import appRecomendations.model.User;
 
 public class Engine {
 	private Rete engine;
@@ -25,6 +30,7 @@ public class Engine {
 		// Load the catalog data into working memory
 		database = aDatabase;
 		engine.addAll(database.getUsers());
+		engine.addAll(database.getApps());
 
 		// Mark end of catalog data for later
 		// marker = engine.mark();
@@ -56,16 +62,29 @@ public class Engine {
 			System.out.println(f.toStringWithParens());
 		}
 		
+		System.out.println("---------------------------------------------------------");
 		// Return the list of offers created by the rules
-		/*QueryResult result =
-	            engine.runQueryStar("users", new ValueVector().add("Otaku"));
+		QueryResult result =
+				
+	            engine.runQueryStar("favoritos", new ValueVector().add(new Value ("Pedro", RU.STRING)));
 	        while (result.next()) {
-	        	System.out.println("Hola");
-	            System.out.println(result.getString("nick") + " " + result.getString("profileName"));
-	        }*/
+	            System.out.println(result.getString("app") + " " + result.getString("name"));
+	        }
 	        
 	        
 		//return engine.runQueryStar("users", new ValueVector().add("Otaku"));
 	        return null;
 	}
+	
+	public void act(User u, App app){
+		
+		try {
+			engine.add(new Launch(u.getName(), app.getName()));
+		} catch (JessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

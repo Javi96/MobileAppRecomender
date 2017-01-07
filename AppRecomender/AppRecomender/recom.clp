@@ -1,10 +1,10 @@
 (import appRecomendations.model.*)
 (deftemplate User       	(declare (from-class User)))
-(deftemplate Aplications	(declare (from-class App)))
+(deftemplate App			(declare (from-class App)))
 (deftemplate Like 			(slot nick) (slot app)(slot fav))
+(deftemplate Launch			(declare (from-class Launch)))
 ;;(deftemplate Profiles   (declare (from-class Profiles)))
 ;;(deftemplate Profile 	(slot nick) (slot profileName))
-
 ;;(defquery likes
 ;;    (declare (variables ?nick))
 ;;    (Like (nick ?nick) (app ?app))
@@ -144,3 +144,22 @@
     			(assert (Like (nick ?nick) (app "Rap") (fav 1)))
     		)
 
+
+(defquery favoritos "encuentra los favoritos de un usuario"
+    (declare (variables ?nick))
+    (Like (nick ?nick) (app ?app))
+    (App (categoryList ?app) (name ?name))
+ )
+
+(deffunction calcNewFav (?fav)
+				return ?fav + 1
+)
+
+(defrule increasefav
+    ?l <- (Launch (nick ?nick) (appName ?appName))
+    (App (name ?appName) (categoryList ?app))
+    ?o <- (Like (nick ?nick) (app ?app) (fav ?fav))
+		=>
+    (modify ?o (fav (calcNewFav ?fav)))
+    (remove ?l)
+  )

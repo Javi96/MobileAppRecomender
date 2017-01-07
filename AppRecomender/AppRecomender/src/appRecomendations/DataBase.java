@@ -22,13 +22,13 @@ public class DataBase{
 
 	public DataBase() {
 		createUsers();
-		//createApps();
+		createApps();
 		//createProfiles();
 	}
 	
 	/*private void createApps() {
 		apps = new ArrayList();
-		apps.add(new App("transistor", (float)17.00, new String[] {"Game", "OST", "Romantic"}));	
+		apps.add(new App("transistor", (float)17.00, new String[] {"Romantic"}));	
 		apps.add(new App("Minecraft", (float)5.00, new String[] {"Game", "OST", "Sand box"}));		
 		apps.add(new App("Clash royale", (float)0.00, new String[] {"Game", "OST", "Pay to win++"}));		
 		apps.add(new App("Clash of clans", (float)0.00, new String[] {"Game", "OST", "Pay to win"}));		
@@ -40,6 +40,11 @@ public class DataBase{
 		
 
 	}*/
+	
+	private void createApps(){
+		apps = new ArrayList();
+		apps.add(new App("pruebaFunc", (float)10.00, "Vocaloid", 0));
+	}
 
 	private void createUsers() {
 		users = new ArrayList();
