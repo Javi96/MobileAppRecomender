@@ -57,6 +57,24 @@
 			    =>
 			    (modify ?u (language german))
 			    )
+			
+			(defrule languageJapan
+			    ?u <- (User {country == "Japan"})
+			    =>
+			    (modify ?u (language japanese))
+			    )
+
+			(defrule languageChina
+			    ?u <- (User {country == "China"})
+			    =>
+			    (modify ?u (language chinese))
+			    )
+
+			(defrule languageRussia
+			    ?u <- (User {country == "Russia"})
+			    =>
+			    (modify ?u (language russian))
+			    )
 
 			;; ------------------------------------------------------------
 			;;-------------------REGLAS EDAD USUARIO-----------------------
@@ -103,9 +121,33 @@
 	        	(modify ?u (ecLvl high))
         	)
 
-				;; ------------------------------------------------------------
-				;;----------------ESPAÑA FRANCIA ITALIA------------------------
-				;;-------------------------------------------------------------
+			(defrule ecLvlJapanChinaLow
+    			?u <- (User {country == "China" && country == "Japan"}
+        		{age < 12})
+    			=>
+	        	(modify ?u (ecLvl low))
+        	)
+			
+			(defrule ecLvlJapanChinaMedium
+    			?u <- (User {country == "China" && country == "Japan"}
+        		{age > 12 && age < 25})
+    			=>
+	        	(modify ?u (ecLvl medium))
+        	)
+			
+			(defrule ecLvlJapanChinaRussiaHigh
+    			?u <- (User {country == "China" && country == "Japan" && country == "Russia"}
+        		{age > 25})
+    			=>
+	        	(modify ?u (ecLvl medium))
+        	)
+			
+			(defrule ecLvlRussiaLow
+    			?u <- (User {country == "Russia"}
+        		{age < 25})
+    			=>
+	        	(modify ?u (ecLvl low))
+        	)
 
 			(defrule ecLvlGermanyMedium
     			?u <- (User {country == "Germany"}
@@ -126,7 +168,7 @@
 			;;-------------------------------------------------------------
 
 			(defrule otaku
-    			(User {age > 15 && age < 26} {country == "Spain"} (name ?nick))
+    			(User {age > 15 && age < 26} {country == "Spain" && country == "Japan" && country == "China"} (name ?nick))
     			=>
     			(assert (Like (nick ?nick) (app "Vocaloid") (fav 1)))
     			(assert (Like (nick ?nick) (app "Manga") (fav 1)))
@@ -142,6 +184,16 @@
     			(assert (Like (nick ?nick) (app "Deporte") (fav 1)))
     			(assert (Like (nick ?nick) (app "Comedia") (fav 1)))
     			(assert (Like (nick ?nick) (app "Rap") (fav 1)))
+    		)
+
+			(defrule hipster
+    			(User {age > 22 && age < 35} 
+        		{country == "Germany" && country == "France"}
+        		(name ?nick))
+    			=>
+    			(assert (Like (nick ?nick) (app "Puzzle") (fav 1)))
+    			(assert (Like (nick ?nick) (app "House") (fav 1)))
+    			(assert (Like (nick ?nick) (app "Pop") (fav 1)))
     		)
 
 

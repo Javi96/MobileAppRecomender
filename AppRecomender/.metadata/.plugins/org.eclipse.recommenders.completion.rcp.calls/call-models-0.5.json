@@ -1,0 +1,12 @@
+{
+  "D:\\Users\\Javi\\Desktop\\Eclipse Jess Juno Workspace\\AppRecomender\\src": {
+    "location": "D:\\Users\\Javi\\Desktop\\Eclipse Jess Juno Workspace\\AppRecomender\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\Users\\Javi\\Desktop\\Eclipse Jess Juno Workspace\\AppRecomender\\src\u0027. Skipped."
+  },
+  "D:\\Program Files\\Java\\jre1.8.0_111\\lib\\rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
+    "location": "D:\\Program Files\\Java\\jre1.8.0_111\\lib\\rt.jar",
+    "status": "RESOLVED"
+  }
+}
