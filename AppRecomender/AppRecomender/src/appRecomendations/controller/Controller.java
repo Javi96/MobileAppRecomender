@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import appRecomendations.DataBase;
+import appRecomendations.model.Demo;
 import appRecomendations.model.User;
 import appRecomendations.model.observer.Observer;
 import appRecomendations.view.View;
@@ -48,7 +49,7 @@ public class Controller implements Observer{
 	}
 
 	public void actUserApp (int counter){
-		//model.
+		Demo.runAct(user, model.getApp(counter));
 	}
 	
 	public void opAppEnd() {

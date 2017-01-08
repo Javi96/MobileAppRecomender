@@ -93,8 +93,8 @@ public class DataBase {
 	}
 
 	// ------------------------------------------
-	private ArrayList users;
-	private ArrayList apps;
+	private ArrayList<User> users;
+	private ArrayList<App> apps;
 	private Profiles profiles;
 
 	public DataBase() {
@@ -142,7 +142,7 @@ public class DataBase {
 	}
 
 	private void createApps() {
-		apps = new ArrayList();
+		apps = new ArrayList<App>();
 		apps.add(new App("pruebaFunc", (float) 10.00, "Vocaloid", 0));
 		apps.add(new App("Clash_Royale", (float) 0.00, "Action", 1.1f));
 		apps.add(new App("Clash of Clans", (float) 0.00, "Action", 1.7f));
@@ -151,22 +151,26 @@ public class DataBase {
 		apps.add(new App("Twitter", (float) 0.00, "RRSS", 0.23f));
 		apps.add(new App("Whatsapp", (float) 0.00, "RRSS", 0.15f));
 	}
+	
+	public App getApp(int i){
+		return apps.get(i);
+	}
 
 	private void createUsers() {
-		users = new ArrayList();
+		users = new ArrayList<User>();
 		users.add(new User("Pedro", 1995, 'm', "Spain"));
 	}
 
 	private void createProfiles() {
 		profiles = new Profiles();
 
-		ArrayList likeR = new ArrayList();
+		ArrayList likeR = new ArrayList<String>();
 		likeR.add("Game");
 		likeR.add("shooter");
 		likeR.add("sandbox");
 		profiles.put((String) "RatKid", likeR);
 
-		ArrayList likeO = new ArrayList();
+		ArrayList likeO = new ArrayList<String>();
 		likeO.add("Game");
 		likeO.add("Vocaloid");
 		likeO.add("Manga");

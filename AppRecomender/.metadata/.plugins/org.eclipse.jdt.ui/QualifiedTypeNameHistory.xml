@@ -10,4 +10,5 @@
 <fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
 <fullyQualifiedTypeName name="appRecomendations.model.User"/>
+<fullyQualifiedTypeName name="appRecomendations.model.Demo"/>
 </qualifiedTypeNameHistroy>

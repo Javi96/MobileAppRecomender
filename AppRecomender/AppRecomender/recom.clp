@@ -215,3 +215,7 @@
     (modify ?o (fav (calcNewFav ?fav)))
     (remove ?l)
   )
+
+(defquery getFav
+    (declare (variables ?nick ?app))
+    (Like (nick ?nick)(app ?app)(fav ?fav)))

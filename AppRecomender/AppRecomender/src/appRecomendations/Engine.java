@@ -56,35 +56,46 @@ public class Engine {
 		// Fire the rules that apply to this order
 		engine.run();
 		Iterator listF = engine.listFacts();
-		Fact f ;
+		Fact f;
 		while (listF.hasNext()) {
-			f = (Fact)listF.next();
+			f = (Fact) listF.next();
 			System.out.println(f.toStringWithParens());
 		}
-		
-		System.out.println("---------------------------------------------------------");
+
+		System.out
+				.println("---------------------------------------------------------");
 		// Return the list of offers created by the rules
 		QueryResult result =
-				
-	            engine.runQueryStar("favoritos", new ValueVector().add(new Value ("Pedro", RU.STRING)));
-	        while (result.next()) {
-	            System.out.println(result.getString("app") + " " + result.getString("name"));
-	        }
-	        
-	        
-		//return engine.runQueryStar("users", new ValueVector().add("Otaku"));
-	        return null;
+
+		engine.runQueryStar("favoritos",
+				new ValueVector().add(new Value("Pedro", RU.STRING)));
+		while (result.next()) {
+			System.out.println(result.getString("app") + " "
+					+ result.getString("name"));
+		}
+
+		// return engine.runQueryStar("users", new ValueVector().add("Otaku"));
+		return null;
 	}
-	
-	public void act(User u, App app){
-		
+
+	public void act(User u, App app) {
+
 		try {
-			engine.add(new Launch(u.getName(), app.getName()));
+			ValueVector vv = new ValueVector();
+			vv.add(new Value("Pedro", RU.STRING));
+			vv.add(new Value("Vocaloid", RU.STRING));
+			QueryResult it = engine.runQueryStar("getFav", vv);
+			it.next();
+			Fact f = new Fact("Like", engine);
+			f.setSlotValue("nick", new Value("Pedro", RU.STRING));
+			f.setSlotValue("app", new Value("Vocaloid", RU.STRING));
+			f.setSlotValue("fav", new Value(it.getInt("fav"), RU.INTEGER));
+			engine.modify(f, "fav", new Value(it.getInt("fav") + 1, RU.INTEGER));
 		} catch (JessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }

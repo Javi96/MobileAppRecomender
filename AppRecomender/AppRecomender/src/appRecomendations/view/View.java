@@ -99,6 +99,7 @@ public class View extends JFrame {
 		
 		this.add(this.mainScroll);
 		this.setVisible(true);
+		this.pack();
 	}
 	
 	public static void main(String[] args) {
@@ -176,6 +177,7 @@ public class View extends JFrame {
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		this.add(this.mainScroll);
 		this.setVisible(true);
+		this.pack();
 	}
 	
 	private void generateTextPane(JTextPane component, String constant, int fontSize, Color fontColor) {
