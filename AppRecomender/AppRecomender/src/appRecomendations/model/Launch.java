@@ -22,4 +22,6 @@ public class Launch {
 	public void setAppName(String appName) {
 		this.appName = appName;
 	}
+	
+	
 }

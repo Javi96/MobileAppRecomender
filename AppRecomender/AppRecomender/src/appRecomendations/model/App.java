@@ -7,7 +7,7 @@ public class App {
 	//private float size;
 	
 	
-	public App(String name, float prize, String cat, float size){
+	public App(String name, float prize, String cat){
 		//this.size = size;
 		this.name = name;
 		this.prize = prize;

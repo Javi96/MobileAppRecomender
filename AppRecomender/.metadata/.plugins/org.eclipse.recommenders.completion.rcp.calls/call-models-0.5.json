@@ -8,5 +8,10 @@
     "coordinate": "jre:jre:zip:call:1.0.0",
     "location": "D:\\Program Files\\Java\\jre1.8.0_111\\lib\\rt.jar",
     "status": "RESOLVED"
+  },
+  "D:\\Users\\Javi\\Desktop\\Eclipse Jess Juno Workspace\\AppRecomender\\Lib\\jess.jar": {
+    "location": "D:\\Users\\Javi\\Desktop\\Eclipse Jess Juno Workspace\\AppRecomender\\Lib\\jess.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027D:\\Users\\Javi\\Desktop\\Eclipse Jess Juno Workspace\\AppRecomender\\Lib\\jess.jar\u0027. Neither fingerprint \u00274524d60da48ed82db34b73a3d938af598436328d\u0027 nor symbolic name \u0027jess\u0027 are known."
   }
 }

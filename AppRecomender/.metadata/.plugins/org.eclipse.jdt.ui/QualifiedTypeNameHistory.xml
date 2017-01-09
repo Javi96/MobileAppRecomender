@@ -2,13 +2,30 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="appRecomendations.model.observer.Observer"/>
 <fullyQualifiedTypeName name="appRecomendations.view.View"/>
-<fullyQualifiedTypeName name="javax.swing.JPanel"/>
-<fullyQualifiedTypeName name="javax.swing.BoxLayout"/>
-<fullyQualifiedTypeName name="appRecomendations.model.App"/>
-<fullyQualifiedTypeName name="javax.swing.JTextArea"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
-<fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
-<fullyQualifiedTypeName name="appRecomendations.model.User"/>
 <fullyQualifiedTypeName name="appRecomendations.model.Demo"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="appRecomendations.model.App"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="appRecomendations.Utilities"/>
+<fullyQualifiedTypeName name="appRecomendations.view.AppInfo"/>
+<fullyQualifiedTypeName name="appRecomendations.view.AddUser"/>
+<fullyQualifiedTypeName name="javax.swing.border.Border"/>
+<fullyQualifiedTypeName name="java.awt.Font"/>
+<fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
+<fullyQualifiedTypeName name="javax.swing.JTextPane"/>
+<fullyQualifiedTypeName name="javax.swing.JTextArea"/>
+<fullyQualifiedTypeName name="javax.swing.BoxLayout"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="jess.ValueVector"/>
+<fullyQualifiedTypeName name="javax.swing.Box"/>
+<fullyQualifiedTypeName name="java.awt.Dimension"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="appRecomendations.model.User"/>
+<fullyQualifiedTypeName name="appRecomendations.controller.Controller"/>
 </qualifiedTypeNameHistroy>

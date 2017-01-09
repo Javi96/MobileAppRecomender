@@ -29,193 +29,190 @@
 ;;-----------------REGLAS PERFILES USUARIO---------------------
 ;;-------------------------------------------------------------
 
-			;; ------------------------------------------------------------
-			;;-----------------REGLAS LENGUAJE USUARIO---------------------
-			;;-------------------------------------------------------------
+;; ------------------------------------------------------------
+;;-----------------REGLAS LENGUAJE USUARIO---------------------
+;;-------------------------------------------------------------
 
 
-			(defrule languageSpain
-			    ?u <- (User {country == "Spain"})
-			    =>
-			    (modify ?u (language spanish))
-			    )
-			
-			(defrule languageFrace
-			    ?u <- (User {country == "Frace"})
-			    =>
-			    (modify ?u (language fraçais))
-			    )
-			
-			(defrule languageItaly
-			    ?u <- (User {country == "Italy"})
-			    =>
-			    (modify ?u (language italian))
-			    )
-			
-			(defrule languageGermany
-			    ?u <- (User {country == "Germany"})
-			    =>
-			    (modify ?u (language german))
-			    )
-			
-			(defrule languageJapan
-			    ?u <- (User {country == "Japan"})
-			    =>
-			    (modify ?u (language japanese))
-			    )
+(defrule languageSpain
+    ?u <- (User {country == "Spain"})
+    =>
+    (modify ?u (language spanish))
+    )
 
-			(defrule languageChina
-			    ?u <- (User {country == "China"})
-			    =>
-			    (modify ?u (language chinese))
-			    )
+(defrule languageFrace
+    ?u <- (User {country == "Frace"})
+    =>
+    (modify ?u (language fraçais))
+    )
 
-			(defrule languageRussia
-			    ?u <- (User {country == "Russia"})
-			    =>
-			    (modify ?u (language russian))
-			    )
+(defrule languageItaly
+    ?u <- (User {country == "Italy"})
+    =>
+    (modify ?u (language italian))
+    )
 
-			;; ------------------------------------------------------------
-			;;-------------------REGLAS EDAD USUARIO-----------------------
-			;;-------------------------------------------------------------
+(defrule languageGermany
+    ?u <- (User {country == "Germany"})
+    =>
+    (modify ?u (language german))
+    )
 
-			(deffunction getAge (?date)
-				return (- 2016 ?date)
-			)
+(defrule languageJapan
+    ?u <- (User {country == "Japan"})
+    =>
+    (modify ?u (language japanese))
+    )
 
-			(defrule age
-			    ?u <- (User )
-			    =>
-				(modify ?u (age (getAge ?u.birthYear)))
-		    )
+(defrule languageChina
+    ?u <- (User {country == "China"})
+    =>
+    (modify ?u (language chinese))
+    )
+
+(defrule languageRussia
+    ?u <- (User {country == "Russia"})
+    =>
+    (modify ?u (language russian))
+    )
+
+;; ------------------------------------------------------------
+;;-------------------REGLAS EDAD USUARIO-----------------------
+;;-------------------------------------------------------------
+
+(deffunction getAge (?date)
+    return (- 2017 ?date)
+    )
+
+(defrule age
+    ?u <- (User )
+    =>
+    (modify ?u (age (getAge ?u.birthYear)))
+    )
 
 
-			;; ------------------------------------------------------------
-			;;-------------------REGLAS ECLVL USUARIO----------------------
-			;;-------------------------------------------------------------
-			
-				;; ------------------------------------------------------------
-				;;----------------ESPAÑA FRANCIA ITALIA------------------------
-				;;-------------------------------------------------------------
-				
+;; ------------------------------------------------------------
+;;-------------------REGLAS ECLVL USUARIO----------------------
+;;-------------------------------------------------------------
 
-			(defrule ecLvlSFILow
-	        	?u <- (User {country == "Spain" && country == "Italy" && country == "France"}
-        		{age < 12})
-    			=>
-	        	(modify ?u (ecLvl low))
-        	)
-			
-			(defrule ecLvlSFIMedium
-	        	?u <- (User {country == "Spain" && country == "Italy" && country == "France"}
-        		{age > 12 && age < 25})
-    			=>
-	        	(modify ?u (ecLvl medium))
-        	)
+;; ------------------------------------------------------------
+;;----------------ESPAÑA FRANCIA ITALIA------------------------
+;;-------------------------------------------------------------
 
-			(defrule ecLvlSFIHigh
-	        	?u <- (User {country == "Spain" && country == "Italy" && country == "France"}
-        		{age > 25})
-    			=>
-	        	(modify ?u (ecLvl high))
-        	)
 
-			(defrule ecLvlJapanChinaLow
-    			?u <- (User {country == "China" && country == "Japan"}
-        		{age < 12})
-    			=>
-	        	(modify ?u (ecLvl low))
-        	)
-			
-			(defrule ecLvlJapanChinaMedium
-    			?u <- (User {country == "China" && country == "Japan"}
-        		{age > 12 && age < 25})
-    			=>
-	        	(modify ?u (ecLvl medium))
-        	)
-			
-			(defrule ecLvlJapanChinaRussiaHigh
-    			?u <- (User {country == "China" && country == "Japan" && country == "Russia"}
-        		{age > 25})
-    			=>
-	        	(modify ?u (ecLvl medium))
-        	)
-			
-			(defrule ecLvlRussiaLow
-    			?u <- (User {country == "Russia"}
-        		{age < 25})
-    			=>
-	        	(modify ?u (ecLvl low))
-        	)
+(defrule ecLvlSFILow
+    ?u <- (User {country == "Spain" || country == "Italy" || country == "France"}
+        {age < 12})
+    =>
+    (modify ?u (ecLvl 5.0))
+    )
 
-			(defrule ecLvlGermanyMedium
-    			?u <- (User {country == "Germany"}
-        		{age < 25})
-    			=>
-	        	(modify ?u (ecLvl medium))
-        	)
-			
-			(defrule ecLvlGermanyHigh
-    			?u <- (User {country == "Germany"}
-        		{age > 25})
-    			=>
-	        	(modify ?u (ecLvl high))
-        	)
-			
-			;; ------------------------------------------------------------
-			;;----------------REGLAS GUSTOS USUARIO PERFIL-----------------
-			;;-------------------------------------------------------------
+(defrule ecLvlSFIMedium
+    ?u <- (User {country == "Spain" || country == "Italy" || country == "France"}
+        {age > 12 && age < 25})
+    =>
+    (modify ?u (ecLvl 15.0))
+    )
 
-			(defrule otaku
-    			(User {age > 15 && age < 26} {country == "Spain" && country == "Japan" && country == "China"} (name ?nick))
-    			=>
-    			(assert (Like (nick ?nick) (app "Vocaloid") (fav 1)))
-    			(assert (Like (nick ?nick) (app "Manga") (fav 1)))
-    			(assert (Like (nick ?nick) (app "Animacion") (fav 1)))
-    		)
-			
-			(defrule ratKid
-    			(User {age < 14} 
-        		{country == "Spain" && country == "France"}
-        		(name ?nick))
-    			=>
-    			(assert (Like (nick ?nick) (app "Aventura") (fav 1)))
-    			(assert (Like (nick ?nick) (app "Deporte") (fav 1)))
-    			(assert (Like (nick ?nick) (app "Comedia") (fav 1)))
-    			(assert (Like (nick ?nick) (app "Rap") (fav 1)))
-    		)
+(defrule ecLvlSFIHigh
+    ?u <- (User {country == "Spain" || country == "Italy" || country == "France"}
+        {age > 25})
+    =>
+    (modify ?u (ecLvl 80.0))
+    )
 
-			(defrule hipster
-    			(User {age > 22 && age < 35} 
-        		{country == "Germany" && country == "France"}
-        		(name ?nick))
-    			=>
-    			(assert (Like (nick ?nick) (app "Puzzle") (fav 1)))
-    			(assert (Like (nick ?nick) (app "House") (fav 1)))
-    			(assert (Like (nick ?nick) (app "Pop") (fav 1)))
-    		)
+(defrule ecLvlJapanChinaLow
+    ?u <- (User {country == "China" || country == "Japan"}
+        {age < 12})
+    =>
+    (modify ?u (ecLvl 5.0))
+    )
+
+(defrule ecLvlJapanChinaMedium
+    ?u <- (User {country == "China" || country == "Japan"}
+        {age > 12 && age < 25})
+    =>
+    (modify ?u (ecLvl 15.0))
+    )
+
+(defrule ecLvlJapanChinaRussiaHigh
+    ?u <- (User {country == "China" || country == "Japan" || country == "Russia"}
+        {age > 25})
+    =>
+    (modify ?u (ecLvl 15.0))
+    )
+
+(defrule ecLvlRussiaLow
+    ?u <- (User {country == "Russia"}
+        {age < 25})
+    =>
+    (modify ?u (ecLvl 5.0))
+    )
+
+(defrule ecLvlGermanyMedium
+    ?u <- (User {country == "Germany"}
+        {age < 25})
+    =>
+    (modify ?u (ecLvl 15.0))
+    )
+
+(defrule ecLvlGermanyHigh
+    ?u <- (User {country == "Germany"}
+        {age > 25})
+    =>
+    (modify ?u (ecLvl 80.0))
+    )
+
+;; ------------------------------------------------------------
+;;----------------REGLAS GUSTOS USUARIO PERFIL-----------------
+;;-------------------------------------------------------------
+
+(defrule ratKid
+    (User {(country == "Spain" || country == "France" ) && (age > 0) && (age < 14)}
+        (name ?nick))
+    	
+    =>
+    (assert (Like (nick ?nick) (app "Aventura") (fav 1)))
+    (assert (Like (nick ?nick) (app "Deporte") (fav 1)))
+    (assert (Like (nick ?nick) (app "Comedia") (fav 1)))
+    (assert (Like (nick ?nick) (app "Rap") (fav 1)))
+    )
+
+(defrule otaku
+    (User {(country == "Spain" || country == "Japan" || country == "China") && (age > 15 && age < 26)} (name ?nick))
+    =>
+    (assert (Like (nick ?nick) (app "Vocaloid") (fav 1)))
+    (assert (Like (nick ?nick) (app "Manga") (fav 1)))
+    (assert (Like (nick ?nick) (app "Animacion") (fav 1)))
+    )
+
+(defrule hipster
+    (User 
+        {(country == "Germany" || country == "France") && (age > 22 && age < 35)}
+        (name ?nick))
+    =>
+    (assert (Like (nick ?nick) (app "Puzzle") (fav 1)))
+    (assert (Like (nick ?nick) (app "House") (fav 1)))
+    (assert (Like (nick ?nick) (app "Pop") (fav 1)))
+    )
 
 
 (defquery favoritos "encuentra los favoritos de un usuario"
     (declare (variables ?nick))
-    (Like (nick ?nick) (app ?app))
+    (Like (nick ?nick) (app ?app) (fav ?fav))
     (App (categoryList ?app) (name ?name))
- )
+    )
 
-(deffunction calcNewFav (?fav)
-				return ?fav + 1
-)
-
-(defrule increasefav
-    ?l <- (Launch (nick ?nick) (appName ?appName))
-    (App (name ?appName) (categoryList ?app))
-    ?o <- (Like (nick ?nick) (app ?app) (fav ?fav))
-		=>
-    (modify ?o (fav (calcNewFav ?fav)))
-    (remove ?l)
-  )
+(defquery appFinder
+    (declare (variables ?name))
+    (App (name ?name) (categoryList ?categoryList) (prize ?prize))
+    
+    )
 
 (defquery getFav
     (declare (variables ?nick ?app))
     (Like (nick ?nick)(app ?app)(fav ?fav)))
+
+(defquery findUser
+    (declare (variables ?name))
+    (User (name ?name)))

@@ -1,0 +1,127 @@
+package appRecomendations.view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+
+import appRecomendations.Utilities;
+import appRecomendations.model.User;
+
+public class AddUser extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AddUser(User user) {
+		this.setBackground(Color.white);
+		JTextPane textPane = new JTextPane();
+		Utilities.generateTextPane(textPane, "New user: " + user.getName(), 26,
+				Color.black);
+
+		JPanel horizontPanel = new JPanel();
+		horizontPanel.setLayout(new BoxLayout(horizontPanel, BoxLayout.X_AXIS));
+		horizontPanel.add(textPane);
+		JButton changeUser = new JButton("Change User");
+		changeUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectionButtonPressed();
+			}
+		});
+
+		JButton newUser = new JButton("New User");
+		newUser.addMouseListener(new MouseListener() {
+
+			public void mouseReleased(MouseEvent arg0) {
+			}
+
+			public void mousePressed(MouseEvent arg0) {
+			}
+
+			public void mouseExited(MouseEvent arg0) {
+			}
+
+			public void mouseEntered(MouseEvent arg0) {
+			}
+
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("new user");
+
+			}
+		});
+		horizontPanel.add(Box.createRigidArea(new Dimension(50, 0)));
+		horizontPanel.add(changeUser);
+		horizontPanel.add(Box.createRigidArea(new Dimension(50, 0)));
+		horizontPanel.add(newUser);
+		horizontPanel.add(Box.createRigidArea(new Dimension(50, 0)));
+
+		this.add(horizontPanel);
+
+		textPane = new JTextPane();
+		Utilities.generateTextPane(textPane, "New user: ", 26, Color.black);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(textPane);
+
+		textPane = new JTextPane();
+		Utilities.generateTextPane(textPane, "Name", 20, Color.black);
+		this.add(textPane);
+
+		JTextArea imput = new JTextArea();
+		setImput(imput);
+		this.add(imput);
+
+		textPane = new JTextPane();
+		Utilities.generateTextPane(textPane, "Year of birth", 20, Color.black);
+		this.add(textPane);
+
+		imput = new JTextArea();
+		setImput(imput);
+		this.add(imput);
+
+		textPane = new JTextPane();
+		Utilities.generateTextPane(textPane, "Sex (m or f)", 20, Color.black);
+		this.add(textPane);
+
+		imput = new JTextArea();
+		setImput(imput);
+		this.add(imput);
+
+		textPane = new JTextPane();
+		Utilities.generateTextPane(textPane, "Country", 20, Color.black);
+		this.add(textPane);
+
+		imput = new JTextArea();
+		setImput(imput);
+		this.add(imput);
+
+	}
+
+	private void setImput(JTextArea textArea) {
+		textArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		textArea.setBackground(Color.LIGHT_GRAY);
+		textArea.setBorder(BorderFactory.createEtchedBorder());
+	}
+
+	public static void main(String[] args) {
+		AddUser app = new AddUser(new User("Pedro", 1995, 'm', "Spain"));
+		app.setPreferredSize(new Dimension(500, 500));
+
+		JFrame frame = new JFrame();
+		frame.pack();
+		frame.add(app);
+		frame.setVisible(true);
+
+	}
+}
