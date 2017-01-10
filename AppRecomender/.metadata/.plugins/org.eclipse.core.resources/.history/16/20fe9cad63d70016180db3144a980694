@@ -1,0 +1,239 @@
+(import appRecomendations.model.*)
+(defmodule USER)
+(deftemplate User       	(declare (from-class User)))
+(defmodule APP)
+(deftemplate App			(declare (from-class App)))
+(defmodule LIKE)
+(deftemplate Like 			(slot nick) (slot app)(slot fav))
+;;(deftemplate Profiles   (declare (from-class Profiles)))
+;;(deftemplate Profile 	(slot nick) (slot profileName))
+;;(defquery likes
+;;    (declare (variables ?nick))
+;;    (Like (nick ?nick) (app ?app))
+;;    )
+;;(defquery users "Encuentra usuarios con un perfil"
+;;    (declare (variables ?profileName))
+;;    (Profile (nick ?nick) (profileName ?profileName))
+;;    )
+
+;;(defrule usuario1 "Creacion usuario tipo 1"
+;;    ?o <- (User {name  == "Pedro"})
+;;    =>
+;;    (assert (Profile (nick ?o.name) (profileName Otaku)))
+;;    )
+;;(defrule usuario2 "Creacion usuario tipo 2"
+;;    ?o <- (User {name  == "Javi"})
+;;    =>
+;;    (assert (Profile (nick ?o.name) (profileName RatKid)))
+;;    )
+
+;; ------------------------------------------------------------
+;;-----------------REGLAS PERFILES USUARIO---------------------
+;;-------------------------------------------------------------
+
+;; ------------------------------------------------------------
+;;-----------------REGLAS LENGUAJE USUARIO---------------------
+;;-------------------------------------------------------------
+
+
+(defrule USER::languageSpain
+    ?u <- (USER::User {country == "Spain"})
+    =>
+    (modify ?u (language spanish))
+    (pop-focus)
+    )
+
+(defrule USER::languageFrace
+    ?u <- (USER::User {country == "Frace"})
+    =>
+    (modify ?u (language fraçais))
+   	 (pop-focus)
+     )
+
+(defrule USER::languageItaly
+    ?u <- (USER::User {country == "Italy"})
+    =>
+    (modify ?u (language italian))
+     (pop-focus)
+    )
+
+(defrule USER::languageGermany
+    ?u <- (USER::User {country == "Germany"})
+    =>
+    (modify ?u (language german))
+     (pop-focus)
+    )
+
+(defrule USER::languageJapan
+    ?u <- (USER::User {country == "Japan"})
+    =>
+    (modify ?u (language japanese))
+     (pop-focus)
+    )
+
+(defrule USER::languageChina
+    ?u <- (USER::User {country == "China"})
+    =>
+    (modify ?u (language chinese))
+     (pop-focus)
+    )
+
+(defrule USER::languageRussia
+    ?u <- (USER::User {country == "Russia"})
+    =>
+    (modify ?u (language russian))
+     (pop-focus)
+    )
+
+;; ------------------------------------------------------------
+;;-------------------REGLAS EDAD USUARIO-----------------------
+;;-------------------------------------------------------------
+
+(deffunction getAge (?date)
+    return (- 2017 ?date)
+    )
+
+(defrule USER::age
+    ?u <- (USER::User )
+    =>
+    (modify ?u (age (getAge ?u.birthYear)))
+     (pop-focus)
+    )
+
+
+;; ------------------------------------------------------------
+;;-------------------REGLAS ECLVL USUARIO----------------------
+;;-------------------------------------------------------------
+
+;; ------------------------------------------------------------
+;;----------------ESPAÑA FRANCIA ITALIA------------------------
+;;-------------------------------------------------------------
+
+
+(defrule USER::ecLvlSFILow
+    ?u <- (USER::User {country == "Spain" || country == "Italy" || country == "France"}
+        {age < 12})
+    =>
+    (modify ?u (ecLvl 5.0))
+    (pop-focus)
+     )
+
+(defrule USER::ecLvlSFIMedium
+    ?u <- (USER::User {country == "Spain" || country == "Italy" || country == "France"}
+        {age > 12 && age < 25})
+    =>
+    (modify ?u (ecLvl 15.0))
+     (pop-focus)
+    )
+
+(defrule USER::ecLvlSFIHigh
+    ?u <- (USER::User {country == "Spain" || country == "Italy" || country == "France"}
+        {age > 25})
+    =>
+    (modify ?u (ecLvl 80.0))
+    
+     (pop-focus))
+
+(defrule USER::ecLvlJapanChinaLow
+    ?u <- (USER::User {country == "China" || country == "Japan"}
+        {age < 12})
+    =>
+    (modify ?u (ecLvl 5.0))
+ (pop-focus)
+        )
+
+(defrule USER::ecLvlJapanChinaMedium
+    ?u <- (USER::User {country == "China" || country == "Japan"}
+        {age > 12 && age < 25})
+    =>
+    (modify ?u (ecLvl 15.0))
+     (pop-focus)
+    )
+
+(defrule USER::ecLvlJapanChinaRussiaHigh
+    ?u <- (USER::User {country == "China" || country == "Japan" || country == "Russia"}
+        {age > 25})
+    =>
+    (modify ?u (ecLvl 15.0))
+     (pop-focus)
+    )
+
+(defrule USER::ecLvlRussiaLow
+    ?u <- (USER::User {country == "Russia"}
+        {age < 25})
+    =>
+    (modify ?u (ecLvl 5.0))
+     (pop-focus)
+    )
+
+(defrule USER::ecLvlGermanyMedium
+    ?u <- (USER::User {country == "Germany"}
+        {age < 25})
+    =>
+    (modify ?u (ecLvl 15.0))
+     (pop-focus)
+    )
+
+(defrule USER::ecLvlGermanyHigh
+    ?u <- (USER::User {country == "Germany"}
+        {age > 25})
+    =>
+    (modify ?u (ecLvl 80.0))
+     (pop-focus)
+    )
+
+;; ------------------------------------------------------------
+;;----------------REGLAS GUSTOS USUARIO PERFIL-----------------
+;;-------------------------------------------------------------
+
+(defrule LIKE::ratKid
+    (USER::User {(country == "Spain" || country == "France" ) && (age > 0) && (age < 14)}
+        (name ?nick))
+    	
+    =>
+    (assert (Like (nick ?nick) (app "Aventura") (fav 1)))
+    (assert (Like (nick ?nick) (app "Deporte") (fav 1)))
+    (assert (Like (nick ?nick) (app "Comedia") (fav 1)))
+    (assert (Like (nick ?nick) (app "Rap") (fav 1)))
+     (pop-focus)
+    )
+
+(defrule LIKE::otaku
+    (USER::User {(country == "Spain" || country == "Japan" || country == "China") && (age > 15 && age < 26)} (name ?nick))
+    =>
+    (assert (Like (nick ?nick) (app "Vocaloid") (fav 1)))
+    (assert (Like (nick ?nick) (app "Manga") (fav 1)))
+    (assert (Like (nick ?nick) (app "Animacion") (fav 1)))
+     (pop-focus)
+    )
+
+(defrule LIKE::hipster
+    (USER::User 
+        {(country == "Germany" || country == "France") && (age > 22 && age < 35)}
+        (name ?nick))
+    =>
+    (assert (Like (nick ?nick) (app "Puzzle") (fav 1)))
+    (assert (Like (nick ?nick) (app "House") (fav 1)))
+    (assert (Like (nick ?nick) (app "Pop") (fav 1)))
+     (pop-focus))
+
+
+(defquery LIKE::favoritos "encuentra los favoritos de un usuario"
+    (declare (variables ?nick))
+    (LIKE::Like (nick ?nick) (app ?app) (fav ?fav))
+    (APP::App (categoryList ?app) (name ?name))
+   )
+
+(defquery LIKE::appFinder
+    (declare (variables ?name))
+    (APP::App (name ?name) (categoryList ?categoryList) (prize ?prize))
+    
+     )
+
+(defquery LIKE::getFav
+    (declare (variables ?nick ?app))
+    (LIKE::Like (nick ?nick)(app ?app)(fav ?fav)))
+
+(defquery LIKE::findUser
+    (declare (variables ?name))
+    (USER::User (name ?name)))

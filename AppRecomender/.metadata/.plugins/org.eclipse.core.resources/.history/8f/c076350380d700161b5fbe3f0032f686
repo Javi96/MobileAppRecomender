@@ -1,0 +1,41 @@
+package appRecomender.model;
+
+public class App {
+	private String name;
+	private float prize;
+	private String categoryList;
+	//private float size;
+	
+	
+	public App(String name, float prize, String cat){
+		//this.size = size;
+		this.name = name;
+		this.prize = prize;
+		//this.superCat = cat[0];
+		categoryList = cat;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public float getPrize() {
+		return prize;
+	}
+
+	public void setPrize(float prize) {
+		this.prize = prize;
+	}
+
+	public String getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(String categoryList) {
+		this.categoryList = categoryList;
+	}
+}

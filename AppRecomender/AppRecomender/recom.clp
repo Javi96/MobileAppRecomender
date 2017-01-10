@@ -1,29 +1,8 @@
-(import appRecomendations.model.*)
+(import appRecomender.model.*)
 (deftemplate User       	(declare (from-class User)))
 (deftemplate App			(declare (from-class App)))
 (deftemplate Like 			(slot nick) (slot app)(slot fav))
-(deftemplate Launch			(declare (from-class Launch)))
-;;(deftemplate Profiles   (declare (from-class Profiles)))
-;;(deftemplate Profile 	(slot nick) (slot profileName))
-;;(defquery likes
-;;    (declare (variables ?nick))
-;;    (Like (nick ?nick) (app ?app))
-;;    )
-;;(defquery users "Encuentra usuarios con un perfil"
-;;    (declare (variables ?profileName))
-;;    (Profile (nick ?nick) (profileName ?profileName))
-;;    )
 
-;;(defrule usuario1 "Creacion usuario tipo 1"
-;;    ?o <- (User {name  == "Pedro"})
-;;    =>
-;;    (assert (Profile (nick ?o.name) (profileName Otaku)))
-;;    )
-;;(defrule usuario2 "Creacion usuario tipo 2"
-;;    ?o <- (User {name  == "Javi"})
-;;    =>
-;;    (assert (Profile (nick ?o.name) (profileName RatKid)))
-;;    )
 
 ;; ------------------------------------------------------------
 ;;-----------------REGLAS PERFILES USUARIO---------------------
@@ -33,6 +12,7 @@
 ;;-----------------REGLAS LENGUAJE USUARIO---------------------
 ;;-------------------------------------------------------------
 
+;;las reglas de idioma establecen el idioma de un usuario por su pais de residencia, en el caso de que no este definido el lenguaje se establecerá a ingles por defecto
 
 (defrule languageSpain
     ?u <- (User {country == "Spain"})
@@ -80,10 +60,12 @@
 ;;-------------------REGLAS EDAD USUARIO-----------------------
 ;;-------------------------------------------------------------
 
+;;cálculo de la edad a partir de la fecha de nacimiento
 (deffunction getAge (?date)
     return (- 2017 ?date)
     )
 
+;;establece la edad del usuario
 (defrule age
     ?u <- (User )
     =>
@@ -95,10 +77,9 @@
 ;;-------------------REGLAS ECLVL USUARIO----------------------
 ;;-------------------------------------------------------------
 
-;; ------------------------------------------------------------
-;;----------------ESPAÑA FRANCIA ITALIA------------------------
-;;-------------------------------------------------------------
 
+;;Establece un nivel económico en función de la edad y pais de residencia
+;;Dicho nivel es un valor de cuanto esta "dispuesto" a pagar
 
 (defrule ecLvlSFILow
     ?u <- (User {country == "Spain" || country == "Italy" || country == "France"}
@@ -167,15 +148,28 @@
 ;;----------------REGLAS GUSTOS USUARIO PERFIL-----------------
 ;;-------------------------------------------------------------
 
+;;Perfiles de usuario generados en funcion del pais y de la edad, establece tipos de aplicaciones por las que tienen preferencia
+
+(defrule standart
+    (User (name ?nick))
+    =>
+    (assert (Like (nick ?nick) (app "Action") (fav 1)))
+    (assert (Like (nick ?nick) (app "Adventure") (fav 1)))
+    (assert (Like (nick ?nick) (app "Puzzle") (fav 1)))
+    (assert (Like (nick ?nick) (app "Sports") (fav 1)))
+    (assert (Like (nick ?nick) (app "News") (fav 1)))
+    (assert (Like (nick ?nick) (app "RRSS") (fav 1)))
+    (assert (Like (nick ?nick) (app "Books") (fav 1)))
+    )
+
 (defrule ratKid
     (User {(country == "Spain" || country == "France" ) && (age > 0) && (age < 14)}
         (name ?nick))
-    	
     =>
-    (assert (Like (nick ?nick) (app "Aventura") (fav 1)))
-    (assert (Like (nick ?nick) (app "Deporte") (fav 1)))
-    (assert (Like (nick ?nick) (app "Comedia") (fav 1)))
-    (assert (Like (nick ?nick) (app "Rap") (fav 1)))
+    (assert (Like (nick ?nick) (app "Adventure") (fav 1)))
+    (assert (Like (nick ?nick) (app "Sports") (fav 1)))
+    (assert (Like (nick ?nick) (app "Action") (fav 1)))
+    (assert (Like (nick ?nick) (app "RRSS") (fav 1)))
     )
 
 (defrule otaku
@@ -183,18 +177,28 @@
     =>
     (assert (Like (nick ?nick) (app "Vocaloid") (fav 1)))
     (assert (Like (nick ?nick) (app "Manga") (fav 1)))
-    (assert (Like (nick ?nick) (app "Animacion") (fav 1)))
+    (assert (Like (nick ?nick) (app "RRSS") (fav 1)))
+    (assert (Like (nick ?nick) (app "Strategy") (fav 1)))
+    (assert (Like (nick ?nick) (app "Books") (fav 1)))
     )
 
 (defrule hipster
-    (User 
-        {(country == "Germany" || country == "France") && (age > 22 && age < 35)}
+    (User
+        {(country == "Germany" || country == "France" || country == "Russia") && (age > 22 && age < 35)}
         (name ?nick))
     =>
     (assert (Like (nick ?nick) (app "Puzzle") (fav 1)))
-    (assert (Like (nick ?nick) (app "House") (fav 1)))
-    (assert (Like (nick ?nick) (app "Pop") (fav 1)))
+    (assert (Like (nick ?nick) (app "RRSS") (fav 1)))
+    (assert (Like (nick ?nick) (app "Books") (fav 1)))
+    (assert (Like (nick ?nick) (app "News") (fav 1)))
+    (assert (Like (nick ?nick) (app "Navigation") (fav 1)))
+    
+    
     )
+
+;;------------------------------------------------------------------
+;;-------------------Querys-----------------------------------------
+;;------------------------------------------------------------------
 
 
 (defquery favoritos "encuentra los favoritos de un usuario"
@@ -203,16 +207,16 @@
     (App (categoryList ?app) (name ?name))
     )
 
-(defquery appFinder
+(defquery appFinder "encuentra aplicaciones por nombre"
     (declare (variables ?name))
     (App (name ?name) (categoryList ?categoryList) (prize ?prize))
     
     )
 
-(defquery getFav
+(defquery getFav "encuentra el gusto de una persona por un tipo de aplicacion"
     (declare (variables ?nick ?app))
     (Like (nick ?nick)(app ?app)(fav ?fav)))
 
-(defquery findUser
+(defquery findUser "Encuentra usuarios por nick"
     (declare (variables ?name))
     (User (name ?name)))

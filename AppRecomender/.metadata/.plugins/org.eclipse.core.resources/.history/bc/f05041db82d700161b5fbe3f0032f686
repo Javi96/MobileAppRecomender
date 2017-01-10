@@ -1,0 +1,88 @@
+package appRecomender.controller;
+
+import java.util.Observer;
+import jess.JessException;
+import appRecomender.DataBase;
+import appRecomender.Engine;
+import appRecomender.model.App;
+import appRecomender.model.User;
+import appRecomender.view.View;
+
+/**
+ * 
+ * Clase controlador del MVC que gestiona la comunicación entre la vista y el modelo
+ * 
+ * @author Javi
+ *
+ */
+public class Controller {
+
+	/**
+	 * 
+	 * Atributos privados
+	 * 
+	 */
+	private Engine model;
+
+	private View view;
+
+	private User user;
+
+	public Controller(Engine model, View view) {
+		this.user = new User("Pedro", 1995, 'm', "Spain");
+		this.model = model;
+		try {
+			model.run();
+		} catch (JessException e) {
+			e.printStackTrace();
+		}
+		this.view = view;
+		model.addObserver(view);
+		this.view.start(this);
+	}
+
+	public void add(Observer o) {
+		model.addObserver(o);
+	}
+
+	public static void main(String[] args) {
+		try {
+			new Controller(new Engine(new DataBase()), new View());
+		} catch (JessException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void act(App app) {
+		model.act(user, app);
+
+	}
+
+	public void getRecom() {
+		model.getRecom(user);
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void newUser(User user) {
+		User tempUser = model.newUser(user);
+		if (tempUser != null) {
+			this.user = tempUser;
+		}
+
+	}
+
+	public void changeUser(User user) {
+		User tempUser = model.changeUser(user);
+		if (tempUser != null) {
+			this.user = tempUser;
+			getRecom();
+		}
+	}
+
+	public void addUser(User user) {
+		model.newUser(user);
+	}
+}

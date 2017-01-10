@@ -1,7 +1,0 @@
-package appRecomendations.view;
-
-import javax.swing.JPanel;
-
-public class AppInfo extends JPanel{
-	
-}

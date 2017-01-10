@@ -3,3 +3,34 @@
 1483999199503	Rename local variable 'newUser'
 1484000125121	Rename method 'chageUser'
 1484002381225	Delete element
+1484056271198	Rename resource 'BBC_News.png'
+1484056278259	Rename resource 'El_Mundo.png'
+1484056283973	Rename resource 'EL_PAIS.png'
+1484056357480	Move files
+1484058446199	Move files
+1484060335832	Move files
+1484060514633	Rename resource 'Marvel_Comics.png'
+1484060525709	Rename resource 'Guinness_World_Records_2014.png'
+1484060533415	Rename resource 'Google_Play_Books.png'
+1484060539144	Rename resource 'Ebook_Reader.png'
+1484060545816	Rename resource 'DC_Comics.png'
+1484060555122	Rename resource 'Casa_del_Libro.png'
+1484060583140	Rename resource 'Super_Mario_Run.png'
+1484060653748	Move files
+1484060749024	Move files
+1484061157408	Rename resource 'MARVEL Batalla de Superhéroes.png'
+1484062184139	Rename field 'mainScroll'
+1484070693437	Rename resource 'Candy_Crush_Saga.png'
+1484070699650	Rename resource 'Angry_Birds_2.png'
+1484084449527	Delete element
+1484084450648	Delete element
+1484084453101	Delete element
+1484084461893	Delete element
+1484084651095	Move files
+1484084654274	Delete element
+1484084886520	Rename package 'appRecomendations'
+1484084908055	Rename package 'appRecomendations.controller'
+1484084914989	Rename package 'appRecomendations.model'
+1484084923289	Rename package 'appRecomendations.view'
+1484084934738	Rename package 'appRecomendations.model.images'
+1484085038181	Move compilation unit
